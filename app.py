@@ -62,14 +62,18 @@ def make_url(title):
 def make_title(url):
 	return url.replace("_", " ")
 
+# The current RowID
+current_row = None
+
 
 @app.route("/", methods=["GET","POST"])
 @app.route("/index.html", methods=["GET","POST"])
 def index():
 	if request.method == "GET": # If the form is not being used, just display the page
 		titles = get_titles()
-		links = [ [str("/title/" + make_url(i[0])), i[0]] for i in titles]
+		links = [ [ str("/title/" + make_url(i[0])), i[0] ] for i in titles]
 		return render_template("index.html", post_list=links)
+
 	else: # Take the title and post from the form and make a new post
 		title = request.form["new_title"]
 		post = request.form["new_post"]
@@ -91,6 +95,7 @@ def title(post_title):
 		post = get_post(title)
 		comments = [str(i[0]) for i in get_comments(title)]
 		return render_template("title.html", title=title, post=post, comments=comments)
+
 	else:
 		title = make_title(post_title)
 		comment = request.form["comment"]
