@@ -8,11 +8,10 @@
 {% endfor %}
 
 
-<form>
+<form method="POST">
 	<label for="Title">Title: </label>
-	<input type="text" id="Title" placeholder="Title"></input>
-
-	<textarea></textarea>
-	<button type="submit" name="new_post" value="new_post">Post</button>
+	<input type="text" id="Title" name="new_title"></input> <br><br>
+	<textarea name="new_post"></textarea> <br><br>
+	<button type="submit">Post</button>
 </form>
 {% endblock main %}

@@ -11,9 +11,11 @@
 {% endfor %}
 <br>
 
-<form>
+<form method="POST">
 	<label for="Comment">Comment </label>
-	<textarea id="Comment"></textarea>
-	<button type="submit" name="new_comment" value="new_comment">Post</button>
+	<textarea id="Comment" name="comment"></textarea>
+	<button type="submit">Post</button>
 </form>
+<br>
+<a href="/">Back To Home</a>
 {% endblock main %}
