@@ -8,10 +8,6 @@ app = Flask(__name__)
 def index():
 	return render_template("index.html", post_link=None, post=None)
 
-@app.route("/create.html")
-def create():
-	return render_template("create.html")
-
 @app.route("/title/<post_title>")
 def title(post_title):
 	post = handle.get_post(post_title)
