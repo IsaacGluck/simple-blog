@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% for post in post_list %}
+<ul>
+	<li><a href={{post_link}}>{{post}}</a></li>
+</ul>
+{% endfor %}
+<a href="create.html">New Post</a>
+{% endblock main %}

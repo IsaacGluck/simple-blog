@@ -24,3 +24,9 @@ def get_comments(title):
 	c.execute(query)
 	comments = c.fetchall()
 	return comments
+
+def get_post(title):
+	query = "SELECT post FROM posts WHERE title = " + title
+	c.execute(query)
+	post = c.fetchall()
+	return post
