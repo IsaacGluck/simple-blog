@@ -1,3 +1,19 @@
 {% extends "base.html" %}
 
+{% block main %}
 
+{{title}}
+<br>
+{{post}}
+<br><br>
+{% for com in comments %}
+{{com}}<br>
+{% endfor %}
+<br>
+
+<form>
+	<label for="Comment">Comment </label>
+	<textarea id="Comment"></textarea>
+	<button type="submit" name="new_comment" value="new_comment">Post</button>
+</form>
+{% endblock main %}

@@ -3,9 +3,10 @@
 {% block main %}
 {% for post in post_list %}
 <ul>
-	<li><a href={{post_link}}>{{post}}</a></li>
+	<li><a href={{post[0]}}>{{post[1]}}</a></li>
 </ul>
 {% endfor %}
+
 
 <form>
 	<label for="Title">Title: </label>
