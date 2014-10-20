@@ -69,11 +69,14 @@ def make_url(title):
 def make_title(url):
 	return url.replace("_", " ")
 
-# The current RowID
-current_row = None
 
+# Page routes
 
 @app.route("/", methods=["GET","POST"])
+@app.route("/login", methods=["GET","POST"])
+def login():
+    return render_template("login.html")
+
 @app.route("/index.html", methods=["GET","POST"])
 def index():
 	if request.method == "GET": # If the form is not being used, just display the page
