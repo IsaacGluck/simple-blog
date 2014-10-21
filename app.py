@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request, redirect, g
+from flask import Flask, render_template, request, redirect, g, session, escape, url_for
 
 app = Flask(__name__)
 
@@ -25,18 +25,18 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-def new_post(title, post):
+def new_post(title, post, username):
 	conn = get_db()
 	cur = conn.cursor()
-	insert = "INSERT INTO posts VALUES (" + "\'" + title + "\'" + ", " + "\'" + post + "\'" + ")"
+	insert = "INSERT INTO posts VALUES (" + "\'" + title + "\'" + ", " + "\'" + post + "\'" + "," + "\'" + username + "\'" + ")"
 	cur.execute(insert)
 	conn.commit()
 	conn.close()
 
-def new_comment(title, comment):
+def new_comment(title, comment, username):
 	conn = get_db()
 	cur = conn.cursor()
-	insert = "INSERT INTO comments VALUES (" + "\'" + title + "\'" + ", " + "\'" + comment + "\'" + ")"
+	insert = "INSERT INTO comments VALUES (" + "\'" + title + "\'" + ", " + "\'" + comment + "\'" + "," + "\'" + username + "\'" + ")"
 	cur.execute(insert)
 	conn.commit()
 	conn.close()
@@ -75,7 +75,15 @@ def make_title(url):
 @app.route("/", methods=["GET","POST"])
 @app.route("/login", methods=["GET","POST"])
 def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('index'))
     return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 @app.route("/index.html", methods=["GET","POST"])
 def index():
@@ -85,17 +93,15 @@ def index():
 		return render_template("index.html", post_list=links)
 
 	else: # Take the title and post from the form and make a new post
-		title = request.form["new_title"]
-		post = request.form["new_post"]
-
-		new_post(title, post) # put the new post into the database
-		titles = get_titles()
-		links = [ [str("/title/" + make_url(i[0])), i[0]] for i in titles]
-		return render_template("index.html", post_list=links)
-
-
-
-
+        if 'username' in session:
+            title = request.form["new_title"]
+            post = request.form["new_post"]
+            new_post(title, post, escape(session['username'])) # put the new post into the database
+            titles = get_titles()
+            links = [ [str("/title/" + make_url(i[0])), i[0]] for i in titles]
+            return render_template("index.html", post_list=links)
+        else:
+            return 'You are not logged in'
 
 
 @app.route("/title/<post_title>", methods=["GET","POST"])
@@ -107,14 +113,16 @@ def title(post_title):
 		return render_template("title.html", title=title, post=post, comments=comments)
 
 	else:
-		title = make_title(post_title)
-		comment = request.form["comment"]
-		new_comment(title, comment)
-
-		post = get_post(title)
-		comments = [str(i[0]) for i in get_comments(title)]
-		return render_template("title.html", title=title, post=post, comments=comments)
-
+        if 'username' in session:
+            title = make_title(post_title)
+            comment = request.form["comment"]
+            new_comment(title, comment, escape(session['username']))
+            post = get_post(title)
+            comments = [str(i[0]) for i in get_comments(title)]
+            return render_template("title.html", title=title, post=post, comments=comments)
+        else:
+            return 'You are not logged in'
+        
 
 if __name__=="__main__":
 	#app.run(host='0.0.0.0', port=8080, debug=True)
