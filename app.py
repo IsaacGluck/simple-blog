@@ -85,14 +85,14 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
-@app.route("/index.html", methods=["GET","POST"])
+@app.route("/index", methods=["GET","POST"])
 def index():
-	if request.method == "GET": # If the form is not being used, just display the page
-		titles = get_titles()
-		links = [ [ str("/title/" + make_url(i[0])), i[0] ] for i in titles]
-		return render_template("index.html", post_list=links)
-
-	else: # Take the title and post from the form and make a new post
+    if request.method == "GET":
+    # If the form is not being used, just display the page
+        titles = get_titles()
+        links = [ [ str("/title/" + make_url(i[0])), i[0] ] for i in titles]
+        return render_template("index.html", post_list=links)
+    else: # Take the title and post from the form and make a new post
         if 'username' in session:
             title = request.form["new_title"]
             post = request.form["new_post"]
