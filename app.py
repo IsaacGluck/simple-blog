@@ -110,14 +110,14 @@ def title(post_title):
 		comments = [str(i[0]) for i in get_comments(title)]
 		return render_template("title.html", title=title, post=post, comments=comments)
 	elif 'username' in session:
-        title = make_title(post_title)
-        comment = request.form["comment"]
-        new_comment(title, comment, escape(session['username']))
-        post = get_post(title)
-        comments = [str(i[0]) for i in get_comments(title)]
-        return render_template("title.html", title=title, post=post, comments=comments)
-    else:
-        return 'You are not logged in'
+            title = make_title(post_title)
+            comment = request.form["comment"]
+            new_comment(title, comment, escape(session['username']))
+            post = get_post(title)
+            comments = [str(i[0]) for i in get_comments(title)]
+            return render_template("title.html", title=title, post=post, comments=comments)
+        else:
+            return 'You are not logged in'
         
 
 if __name__=="__main__":
