@@ -63,6 +63,17 @@ def get_post(title):
 	return post[0][0]
 ##### /\DATABASE/\ #####
 
+def check_user(username, password):
+        cur = get_db().cursor()
+        query = "SELECT username FROM users WHERE password = \'" + password + "\'" + "AND username = \'" + username + "\'"
+        cur.execute(query)
+        post = cur.fetchall()
+        if len(post) >= 1:
+            return true
+        else:
+            return false
+        
+
 # URL spaces workaround
 def make_url(title):
 	return title.replace(" ", "_")
@@ -76,8 +87,13 @@ def make_title(url):
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == 'POST':
-        session['username'] = request.form['username']
-        return redirect(url_for('index'))
+        username = request.form['username']
+        password = request.form['password']
+        if check_user(username,password):
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('login'))
     return render_template("login.html")
 
 @app.route("/logout")
