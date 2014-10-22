@@ -88,21 +88,19 @@ def logout():
 @app.route("/index", methods=["GET","POST"])
 def index():
     if request.method == "GET":
-    # If the form is not being used, just display the page
+        # If the form is not being used, just display the page
         titles = get_titles()
         links = [ [ str("/title/" + make_url(i[0])), i[0] ] for i in titles]
         return render_template("index.html", post_list=links)
-    else: # Take the title and post from the form and make a new post
-        if 'username' in session:
-            title = request.form["new_title"]
-            post = request.form["new_post"]
-            new_post(title, post, escape(session['username'])) # put the new post into the database
-            titles = get_titles()
-            links = [ [str("/title/" + make_url(i[0])), i[0]] for i in titles]
-            return render_template("index.html", post_list=links)
-        else:
-            return 'You are not logged in'
-
+    elif 'username' in session:
+        title = request.form["new_title"]
+        post = request.form["new_post"]
+        new_post(title, post, escape(session['username'])) # put the new post into the database
+        titles = get_titles()
+        links = [ [str("/title/" + make_url(i[0])), i[0]] for i in titles]
+        return render_template("index.html", post_list=links)
+    else:
+        return 'You are not logged in'
 
 @app.route("/title/<post_title>", methods=["GET","POST"])
 def title(post_title):
@@ -111,17 +109,15 @@ def title(post_title):
 		post = get_post(title)
 		comments = [str(i[0]) for i in get_comments(title)]
 		return render_template("title.html", title=title, post=post, comments=comments)
-
-	else:
-        if 'username' in session:
-            title = make_title(post_title)
-            comment = request.form["comment"]
-            new_comment(title, comment, escape(session['username']))
-            post = get_post(title)
-            comments = [str(i[0]) for i in get_comments(title)]
-            return render_template("title.html", title=title, post=post, comments=comments)
-        else:
-            return 'You are not logged in'
+	elif 'username' in session:
+        title = make_title(post_title)
+        comment = request.form["comment"]
+        new_comment(title, comment, escape(session['username']))
+        post = get_post(title)
+        comments = [str(i[0]) for i in get_comments(title)]
+        return render_template("title.html", title=title, post=post, comments=comments)
+    else:
+        return 'You are not logged in'
         
 
 if __name__=="__main__":
