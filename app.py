@@ -29,7 +29,7 @@ def close_connection(exception):
 def new_post(title, post, username):
         conn = get_db()
         cur = conn.cursor()
-        insert = "INSERT INTO posts VALUES (" + "\'" + title + "\'" + ", " + "\'" + post + "\'" + "," + "\'" + username + "\'" + ")"
+        insert = "INSERT INTO posts VALUES (" + "\'" + title + "\'" + ", " + "\'" + post + "\'" + ", " + "\'" + username + "\'" + ")"
         cur.execute(insert)
         conn.commit()
         conn.close()
@@ -37,7 +37,7 @@ def new_post(title, post, username):
 def new_comment(title, comment, username):
         conn = get_db()
         cur = conn.cursor()
-        insert = "INSERT INTO comments VALUES (" + "\'" + title + "\'" + ", " + "\'" + comment + "\'" + "," + "\'" + username + "\'" + ")"
+        insert = "INSERT INTO comments VALUES (" + "\'" + title + "\'" + ", " + "\'" + comment + "\'" + ", " + "\'" + username + "\'" + ")"
         cur.execute(insert)
         conn.commit()
         conn.close()
