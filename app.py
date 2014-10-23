@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, g, session, escape,
 app = Flask(__name__)
 
 ##### \/DATABASE\/ #####                                                                                                                                                                                                                                                     \
-                                                                                                                                                                                                                                                                              
+
 DATABASE = "blog.db"
 
 def init_db():
@@ -45,7 +45,7 @@ def new_comment(title, comment, username):
 def new_user(username,password):
     conn = get_db()
     cur = conn.cursor()
-    query = "SELECT username FROM users WHERE username = \'" + username + "\'" 
+    query = "SELECT username FROM users WHERE username = \'" + username + "\'"
     cur.execute(query)
     post = cur.fetchall()
     if len(post) != 0:
@@ -56,7 +56,7 @@ def new_user(username,password):
         conn.commit()
         conn.close()
         return True
-    
+
 def get_titles():
         cur = get_db().cursor()
         query = "SELECT title FROM posts"
@@ -87,22 +87,22 @@ def check_user(username, password):
             return True
         else:
             return False
-##### /\DATABASE/\ #####                                                                                                                                                                                                                                                      
+##### /\DATABASE/\ #####
 
 
 # URL spaces workaround                                                                                                                                                                                                                                                      \
-                                                                                                                                                                                                                                                                              
+
 def make_url(title):
         return title.replace(" ", "_")
 def make_title(url):
         return url.replace("_", " ")
 
-# Page routes                                                                                                                                                                                                                                                                 
+# Page routes
 
 @app.route("/", methods=["GET","POST"])
 @app.route("/login", methods=["GET","POST"])
 def login():
-    
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -179,5 +179,5 @@ def title(post_title):
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RRR'
 
 if __name__=="__main__":
-        #app.run(host='0.0.0.0', port=8080, debug=True)                                                                                                                                                                                                                      \                                                                                                                                                                                                                                                                             
+        #app.run(host='0.0.0.0', port=8080, debug=True)                                                                                                                                                                                                                      \
         app.run(debug=True)
