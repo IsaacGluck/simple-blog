@@ -1,7 +1,24 @@
+body {
+    background-color: #F0F8FF;
+}
 .container {
     max-width: 1024px;
     margin: auto;
 } 
+
+.blog-post {
+    max-width: 800px;
+    margin:auto;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:150%;
+}
+.blog-post-title {
+   font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size:250%;
+}
+.blog-post-meta {
+    color:#999;
+}
 
 .form-control {
     max-width: 800px;

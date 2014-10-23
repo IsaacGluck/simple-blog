@@ -1,21 +1,50 @@
 {% extends "base.html" %}
 
+
+
+{% block css %}
+<link href="/static/index.css" rel="stylesheet">
+{% endblock css %}
+
+{% block session_button %}
+<li><a href="/logout">Logout</a></li>
+{% endblock session_button %}
+
+
 {% block main %}
+<title>{{title}}</title>
+<div class="container">
 
-{{title}}
-<br>
-{{post}}
-<br><br>
-{% for com in comments %}
-{{com}}<br>
-{% endfor %}
-<br>
+  <div class="blog-post">
+            <h1 class="blog-post-title">{{title}}</h1>
+            <p class="blog-post-meta">By NAME_OF_USER</p>
 
-<form method="POST">
-	<label for="Comment">Comment </label>
-	<textarea id="Comment" name="comment"></textarea>
-	<button type="submit">Post</button>
-</form>
-<br>
-<a href="/index">Back To Home</a>
+            <p>{{post}}</p>
+	    <br>
+            <hr>
+	    <br>
+	    <h2>Comments</h2>
+	    <br>
+	    <p>
+	    {% for com in comments %}
+	    <h4><strong>USER_GOES_HERE: </strong> {{com}}</h4>
+	    <br>
+	    {% endfor %}
+            </p>
+	    <br>
+	    <hr>
+	    <br><br>
+	    <div class="jumbotron">
+	      <form method="POST">
+		<label for="Comment">Write a comment...</label>
+		<textarea class="form-control" id="Comment" name="comment" rows="8" placeholder="Enter your comment here..."></textarea> <br><br>
+		<button type="submit" class="btn btn-default btn-lg">Post</button>
+	      </form>
+	    </div>
+
+  </div><!-- /.blog-post -->
+
+</div>
+
+
 {% endblock main %}

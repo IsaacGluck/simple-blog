@@ -10,6 +10,7 @@
 
 
 {% block main %}
+<title>Main</title>
 <div class="container">
   <div class="jumbotron">
     <h1>Just a Simple Blog.</h1>
@@ -22,19 +23,18 @@
       </form>
     </p>
   </div>
-
-<h2>Current Posts</h2>
+  <hr>
+  <h2>Current Posts</h2>
   <div class="row marketing">
     <div class="col-lg-6">
-
+      
       {% for post in post_list %}
       <h3><a href={{post[0]}}>{{post[1]}}</a></h3>
       <p> The username goes here </p>
       {% endfor %}
-    
+      
     </div>
   </div>
-
 </div>
 
 
