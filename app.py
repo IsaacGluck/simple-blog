@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, g, session, escape,
 
 app = Flask(__name__)
 
-##### \/DATABASE\/ #####                                                                                                                                                                                                                                                     \
+##### \/DATABASE\/ #####
 
 DATABASE = "blog.db"
 
@@ -90,7 +90,7 @@ def check_user(username, password):
 ##### /\DATABASE/\ #####
 
 
-# URL spaces workaround                                                                                                                                                                                                                                                      \
+# URL spaces workaround
 
 def make_url(title):
         return title.replace(" ", "_")
@@ -143,14 +143,14 @@ def logout():
 @app.route("/index", methods=["GET","POST"])
 def index():
     if request.method == "GET":
-        # If the form is not being used, just display the page                                                                                                                                                                                                               \
+        # If the form is not being used, just display the page
         titles = get_titles()
         links = [ [ str("/title/" + make_url(i[0])), i[0] ] for i in titles]
         return render_template("index.html", post_list=links)
     elif 'username' in session:
         title = request.form["new_title"]
         post = request.form["new_post"]
-        new_post(title, post, escape(session['username'])) # put the new post into the database                                                                                                                                                                              \
+        new_post(title, post, escape(session['username'])) # put the new post into the database
         titles = get_titles()
         links = [ [str("/title/" + make_url(i[0])), i[0]] for i in titles]
         return render_template("index.html", post_list=links)
@@ -179,5 +179,5 @@ def title(post_title):
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RRR'
 
 if __name__=="__main__":
-        #app.run(host='0.0.0.0', port=8080, debug=True)                                                                                                                                                                                                                      \
+        #app.run(host='0.0.0.0', port=8080, debug=True)
         app.run(debug=True)
