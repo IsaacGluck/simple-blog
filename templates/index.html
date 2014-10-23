@@ -7,6 +7,22 @@
 
 
 {% block main %}
+
+<div class="jumbotron">
+  <h1>Just a Simple Blog.</h1>
+  <p class="lead">Create a new post or view an existing post.</p>
+  <p>
+    <form method="POST">
+	<label for="Title">Title: </label>
+	<input class="form-control" type="text" id="Title" name="new_title" placeholder="Title goes here..."></input> <br><br>
+	<textarea class="form-control" name="new_post" rows="8" placeholder="Enter your text here..."></textarea> <br><br>
+	<button type="submit">Post</button>
+</form>
+  </p>
+</div>
+
+
+
 {% for post in post_list %}
 <ul>
 	<li><a href={{post[0]}}>{{post[1]}}</a></li>
@@ -14,10 +30,5 @@
 {% endfor %}
 
 
-<form method="POST">
-	<label for="Title">Title: </label>
-	<input type="text" id="Title" name="new_title"></input> <br><br>
-	<textarea name="new_post"></textarea> <br><br>
-	<button type="submit">Post</button>
-</form>
+
 {% endblock main %}
