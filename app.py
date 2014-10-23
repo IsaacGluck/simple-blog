@@ -150,9 +150,7 @@ def index():
     elif 'username' in session:
         title = request.form["new_title"]
         post = request.form["new_post"]
-        new_post(title, post, escape(session['username'])) # put the new post into the database                                                                                                                                                                              \
-\                                                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                             \
+        new_post(title, post, escape(session['username'])) # put the new post into the database
 
         titles = get_titles()
         links = [ [str("/title/" + make_url(i[0])), i[0]] for i in titles]
@@ -183,8 +181,6 @@ def title(post_title):
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RRR'
 
 if __name__=="__main__":
-        #app.run(host='0.0.0.0', port=8080, debug=True)                                                                                                                                                                                                                      \
-\                                                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                             \
+        #app.run(host='0.0.0.0', port=8080, debug=True)
 
         app.run(debug=True)
