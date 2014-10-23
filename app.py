@@ -155,7 +155,7 @@ def index():
         links = [ [str("/title/" + make_url(i[0])), i[0]] for i in titles]
         return render_template("index.html", post_list=links)
     else:
-        return 'You are not logged in'
+        return render_template("null.html")
 
 
 
@@ -174,7 +174,7 @@ def title(post_title):
             comments = [str(i[0]) for i in get_comments(title)]
             return render_template("title.html", title=title, post=post, comments=comments)
         else:
-            return 'You are not logged in'
+            return render_template("null.html")
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RRR'
 
