@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block session_button %}
+<li><a href="/login">Login</a></li>
+{% endblock session_button %}
+
+
+{% block main %}
+<div class="alert alert-danger" role="alert">
+  <strong>Error:</strong> Registration unsuccessful. The username or password may already exist.
+</div>
+
+{% endblock main %}
