@@ -100,6 +100,19 @@ def login():
 def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
+@app.route("/register",methods=["GET","POST"])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if check_user(username,password):
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('login'))
+    return render_template("register.html")
+
+    
 
 @app.route("/index", methods=["GET","POST"])
 def index():

@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+
+{% block session_button %}
+<li><a href="/logout">Logout</a></li>
+{% endblock session_button %}
+
+
 {% block main %}
 {% for post in post_list %}
 <ul>
