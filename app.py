@@ -178,6 +178,10 @@ def title(post_title):
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RRR'
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 if __name__=="__main__":
         #app.run(host='0.0.0.0', port=8080, debug=True)                                                                                                                                                                                                                      \                                                                                                                                                                                                                                                                             
         app.run(debug=True)
