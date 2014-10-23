@@ -122,6 +122,7 @@ def register():
             return redirect(url_for('register_successful'))
         else:
             return redirect(url_for('register_fail'))
+    return render_template("register.html")
 
 @app.route("/register_successful")
 def register_successful():
