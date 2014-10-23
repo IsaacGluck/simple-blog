@@ -3,9 +3,7 @@ from flask import Flask, render_template, request, redirect, g, session, escape,
 
 app = Flask(__name__)
 
-##### \/DATABASE\/ #####                                                                                                                                                                                                                                                     \
-\                                                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                             \
+##### \/DATABASE\/ #####
 
 DATABASE = "blog.db"
 
