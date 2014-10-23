@@ -89,16 +89,14 @@ def check_user(username, password):
             return False
 ##### /\DATABASE/\ #####    
 
-# URL spaces workaround                                                                                                                                                                                                                                                      \
-\                                                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                             \
+# URL spaces workaround
 
 def make_url(title):
         return title.replace(" ", "_")
 def make_title(url):
         return url.replace("_", " ")
 
-# Page routes                                                                                                                                                                                                                                                                \
+# Page routes
                                                                                                                                                                                                                                                                               
 
 @app.route("/", methods=["GET","POST"])
@@ -144,9 +142,7 @@ def logout():
 @app.route("/index", methods=["GET","POST"])
 def index():
     if request.method == "GET":
-        # If the form is not being used, just display the page                                                                                                                                                                                                               \
-\                                                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                             \
+        # If the form is not being used, just display the page
 
         titles = get_titles()
         links = [ [ str("/title/" + make_url(i[0])), i[0] ] for i in titles]
